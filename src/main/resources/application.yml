@@ -1,0 +1,23 @@
+server.port: 5558
+
+logging.level:
+  root: INFO
+  cl.wom: DEBUG
+  
+app.addition: http://localhost:5557/addition
+app.subtraction: http://localhost:5558/subtraction
+app.multiplication: http://localhost:5559/multiplication
+app.division: http://localhost:5560/division
+
+trackia.component: SUBTRACTION-1-0
+trackia.type: API
+
+trackia.dispatcher.class: TrackiaLoggerDispatcher
+#trackia.dispatcher.url: http://localhost:9999/journal
+#trackia.dispatcher.auth: http://localhost:9999/auth/signin
+
+#trackia.dispatcher.email: 
+#trackia.dispatcher.password: 
+
+#Lista de modulos habilitados separados por coma
+trackia.modules: SysInfoModule, SlaModule, IndexableModule
