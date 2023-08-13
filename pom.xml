@@ -55,7 +55,7 @@
 		</dependency>
 		
 	    <dependency>
-	        <groupId>trackia.app</groupId>
+	        <groupId>app.trackia</groupId>
 	        <artifactId>trackia</artifactId>
 	        <version>1.1.4</version>
 	    </dependency>
