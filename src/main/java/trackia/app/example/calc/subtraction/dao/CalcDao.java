@@ -22,11 +22,9 @@ import com.google.gson.JsonSyntaxException;
 
 import lombok.extern.log4j.Log4j2;
 import trackia.app.Trackia;
-import trackia.app.annotations.R;
 import trackia.app.example.calc.subtraction.to.CalcRequest;
 import trackia.app.example.calc.subtraction.to.CalcResponse;
 import trackia.app.exception.BussinesException;
-import trackia.app.to.Journal;
 import trackia.app.util.RestTemplateJournal;
 import trackia.app.util.Util;
 
@@ -46,32 +44,24 @@ public class CalcDao {
 	@Value(value = "${app.division}")       private String urlDivision;
 	
 	@Trackia(value = "DAO_VALUE_CALC", description = "Calc Value ")
-	public Integer value(@R Object exp, @R String expPart, Journal journal) {
+	public Integer value(Object exp, String expPart) {
 		log.info("value start");
-		journal.setDescription(journal.getDescription() + expPart + " part");
 		
 		String strVal = exp.toString();
 		if(exp.toString().startsWith("{")){
-			return parseRemote(exp, journal);
+			return parseRemote(exp);
 		}else {
 			return parseInt(strVal);
 		}
 	}
 	
-	private Integer parseRemote(Object exp, Journal journal) {
+	private Integer parseRemote(Object exp) {
 		String operation = "";
 		try {
 			final CalcRequest calcExp =  Util.toObject(Util.toJson(exp), CalcRequest.class);
 			operation = "[" + calcExp.getOperation() + "]";
-			final HttpHeaders header = Util.journalHeaderTemplate(journal);
-	        final HttpEntity<CalcRequest> requestEntity = new HttpEntity<>(calcExp, header);
 	    	
-	        final CalcResponse response = restTemplate.exchange(getUrl(calcExp), HttpMethod.POST, requestEntity, CalcResponse.class, journal).getBody();
-			if(response != null) {
-				return response.getResult();
-			}else {
-				throw new BussinesException(HttpStatus.BAD_REQUEST, "No se puede evaluar la expresion", "0007");
-			}
+	        return restTemplate.postForObject(getUrl(calcExp), exp, CalcResponse.class).getResult();
         
 		}catch(ResourceAccessException e) {
 			throw new BussinesException(HttpStatus.NOT_FOUND, "Servicio indisponible momentaneamente en operacion "+ operation, "0006", e);			
