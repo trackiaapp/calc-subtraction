@@ -1,23 +1,14 @@
 server.port: 5558
-
-logging.level:
-  root: INFO
-  cl.wom: DEBUG
   
 app.addition: http://localhost:5557/addition
 app.subtraction: http://localhost:5558/subtraction
 app.multiplication: http://localhost:5559/multiplication
 app.division: http://localhost:5560/division
 
-trackia.component: SUBTRACTION-1-0
-trackia.type: API
 
-##Especifica la salida, considere utilizar TrackiaServerDispatcher para enviar la salida a un servicio rest 
-trackia.dispatcher.class: TrackiaServerDispatcher
-trackia.dispatcher.url: http://localhost:9999/journal
-trackia.dispatcher.auth: http://localhost:9999/auth/signin
-trackia.dispatcher.email: HELLOWORLD-1-0@trackia.app
-trackia.dispatcher.password: 12345678
+trackia.dispatcher.class: trackiaServerDispatcher
+trackia.dispatcher.url: https://trackiaapp.com/journal
+trackia.dispatcher.auth: https://trackiaapp.com/auth/signin
 
-##Lista de modulos habilitados separados por coma
-trackia.modules: SysInfoModule, SlaModule, IndexableModule
+trackia.dispatcher.account: <Account ID>
+trackia.dispatcher.apiKey: <Artefact ApiKey>

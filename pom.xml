@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>trackia.app.example.calc</groupId>
-	<artifactId>subtraction</artifactId>
+	<artifactId>Subtraction-1-0</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>subtraction</name>
 	<description>TrackIA Subtraction Calc Demo</description>
